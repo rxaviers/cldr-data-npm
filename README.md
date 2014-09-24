@@ -10,7 +10,7 @@ On the `package.json` of your i18n library, define which CLDR versions it's
 compatible with.
 
     "dependencies": {
-      "cldr-data": ">26"
+      "cldr-data": ">25"
     }
 
 On your library, access CLDR JSON data using `require("cldr-data")`.
