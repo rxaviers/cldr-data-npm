@@ -26,8 +26,10 @@
   },
   "main": "foo.js",
   "dependencies": {
-    "cldr-data": ">=25",
     "cldrjs": "*"
+  },
+  "peerDependencies": {
+    "cldr-data": ">=25"
   },
   "devDependencies": {
     "grunt": "0.4.x",

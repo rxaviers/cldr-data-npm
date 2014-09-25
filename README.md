@@ -4,7 +4,7 @@ In this example, an i18n library to format numbers is implemented.
 
 On `package.json`, it defines its `cldr-data` dependency.
 
-    "dependencies": {
+    "peerDependencies": {
       "cldr-data": ">=25"
     }
 
