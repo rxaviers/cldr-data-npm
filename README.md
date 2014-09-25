@@ -22,7 +22,7 @@ On the `package.json` of your i18n library, define its CLDR data dependency.
 compatible with.
 
     "peerDependencies": {
-      "cldr-data": ">26"
+      "cldr-data": ">=26"
     }
 
 On your library, access CLDR JSON data using `require("cldr-data")`.
