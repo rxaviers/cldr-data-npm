@@ -21,7 +21,7 @@ Bonus goals
 On the `package.json` of your i18n library, define its CLDR data dependency.
 compatible with.
 
-    "dependencies": {
+    "peerDependencies": {
       "cldr-data": ">26"
     }
 
