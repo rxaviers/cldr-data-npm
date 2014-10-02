@@ -19,6 +19,5 @@ cldrDownloader(
       console.error("Whops", error.message);
       exit(1);
     }
-    console.log("Done");
   }
 );
