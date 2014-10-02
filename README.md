@@ -43,8 +43,8 @@ function Pluralize(locale) {
 }
 ```
 
-For your convinience, use cldr-data in conjunction of [cldr.js][]. You can find
-more details switching to the [Foo Number Format Library Example][] or
+For your convinience, use cldr-data in conjunction with [cldr.js][]. You can
+find more details switching to the [Foo Number Format Library Example][] or
 [Application Example][] branches.
 
 [Foo Number Format Library Example]: https://github.com/rxaviers/cldr-data-npm/tree/example-library-foo
