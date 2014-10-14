@@ -11,10 +11,37 @@
 var assert = require("assert");
 var _path = require("path");
 
-module.exports = function(path) {
+function cldrData(path) {
   assert(typeof path === "string", "must include path (e.g., " +
     "\"main/en/numbers\" or \"supplemental/likelySubtags\")");
 
   path = _path.join("json", path);
   return require("./" + path);
 }
+
+Object.defineProperty(cldrData, "availableLocales", {
+  get: function() {
+    return cldrData("availableLocales").availableLocales;
+  }
+});
+
+cldrData.forEachMain = function(callback) {
+  assert(typeof callback === "function", "must include callback function");
+
+  cldrData.availableLocales.forEach(function(locale) {
+    callback(function(path) {
+      return cldrData(_path.join("main", locale, path));
+    });
+  });
+};
+
+cldrData.main = function(path) {
+  assert(typeof path === "string", "must include path (e.g., " +
+    "\"numbers\" or \"ca-gregorian\")");
+
+  return cldrData.availableLocales.map(function(locale) {
+    return cldrData(_path.join("main", locale, path));
+  });
+}
+
+module.exports = cldrData;
