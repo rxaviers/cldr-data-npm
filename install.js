@@ -10,9 +10,19 @@
 
 var cldrDownloader = require("cldr-data-downloader");
 var path = require("path");
+var urls = require("./urls");
+
+var url = urls[process.env.CLDR_URL_KEY || "json"];
+
+if (process.env.CLDR_URL) {
+  url = url.replace(
+    "http://www.unicode.org/Public/cldr",
+    process.env.CLDR_URL.replace(/\/$/, "")
+  );
+}
 
 cldrDownloader(
-  "http://www.unicode.org/Public/cldr/25/json.zip",
+  url,
   path.join(__dirname, "json"),
   function(error) {
     if (error) {
