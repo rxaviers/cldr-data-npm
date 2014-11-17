@@ -51,6 +51,17 @@ find more details switching to the [Foo Number Format Library Example][] or
 [Application Example]: https://github.com/rxaviers/cldr-data-npm/tree/example-application
 [cldr.js]: https://github.com/rxaviers/cldrjs
 
+### Locale coverage
+
+By default, the locale coverage installed is `core`, which Unicode defines as
+the top tier languages and is equivalent to the `json.zip` content. If you need
+full locale coverage, use `CLDR_COVERAGE` environment variable to modify the
+installation behavior. For example:
+
+```
+$ CLDR_COVERAGE=full npm install
+```
+
 ## License
 
 MIT © [Rafael Xavier de Souza](http://rafael.xavier.blog.br)
