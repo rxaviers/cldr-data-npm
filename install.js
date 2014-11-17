@@ -9,6 +9,7 @@
 "use strict";
 
 var cldrDownloader = require("cldr-data-downloader");
+var exit = process.exit;
 var path = require("path");
 var urls = require("./urls");
 
