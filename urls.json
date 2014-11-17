@@ -1,4 +1,4 @@
 {
-  "json": "http://www.unicode.org/Public/cldr/25/json.zip",
-  "json-full": "http://www.unicode.org/Public/cldr/25/json_full.zip"
+  "core": "http://www.unicode.org/Public/cldr/25/json.zip",
+  "full": "http://www.unicode.org/Public/cldr/25/json_full.zip"
 }

@@ -12,7 +12,7 @@ var cldrDownloader = require("cldr-data-downloader");
 var path = require("path");
 var urls = require("./urls");
 
-var url = urls[process.env.CLDR_URL_KEY || "json"];
+var url = urls[process.env.CLDR_COVERAGE || "core"];
 
 if (process.env.CLDR_URL) {
   url = url.replace(
