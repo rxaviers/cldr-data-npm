@@ -9,7 +9,6 @@
 "use strict";
 
 var cldrDownloader = require("cldr-data-downloader");
-var exit = process.exit;
 var path = require("path");
 var urls = require("./urls");
 
@@ -27,16 +26,14 @@ cldrDownloader(
   path.join(__dirname, "json"),
   function(error) {
     if (error) {
-      console.error("Whops", error.message);
-      exit(1);
-    }
-    if (/E_ALREADY_INSTALLED/.test(error.code)) {
-      error.message = error.message.replace(/Use `options.*/, "Use -f to " +
-        "override.");
-      return console.log(error.message);
-    } else {
-      console.error("Whops", error.message);
-      exit(1);
+      if (/E_ALREADY_INSTALLED/.test(error.code)) {
+        error.message = error.message.replace(/Use `options.*/, "Use -f to " +
+          "override.");
+        return console.log(error.message);
+      } else {
+        console.error("Whops", error.message);
+        process.exit(1);
+      }
     }
   }
 );
