@@ -30,5 +30,13 @@ cldrDownloader(
       console.error("Whops", error.message);
       exit(1);
     }
+    if (/E_ALREADY_INSTALLED/.test(error.code)) {
+      error.message = error.message.replace(/Use `options.*/, "Use -f to " +
+        "override.");
+      return console.log(error.message);
+    } else {
+      console.error("Whops", error.message);
+      exit(1);
+    }
   }
 );
