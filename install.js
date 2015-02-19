@@ -15,7 +15,7 @@ var parentPackage;
 var url;
 
 try {
-  parentPackage = require('../../package.json');
+  parentPackage = require("../../package.json");
 }
 catch(error) {}
 
