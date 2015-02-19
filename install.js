@@ -24,7 +24,7 @@ url = urls[process.env.CLDR_COVERAGE || "core"];
 if (parentPackage) {
   if (parentPackage["cldr-data-coverage"] && parentPackage.dependencies["cldr-data"]) {
     if (!/^full|core$/.test(parentPackage["cldr-data-coverage"])) {
-      throw new TypeError("Your `cldr-data-coverage setting must have the value \"core\" or \"full\".");
+      throw new TypeError("Your `cldr-data-coverage` setting must have the value \"core\" or \"full\".");
     }
     url = urls[parentPackage["cldr-data-coverage"]];
   }
