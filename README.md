@@ -54,12 +54,22 @@ find more details switching to the [Foo Number Format Library Example][] or
 ### Locale coverage
 
 By default, the locale coverage installed is `core`, which Unicode defines as
-the top tier languages and is equivalent to the `json.zip` content. If you need
-full locale coverage, use `CLDR_COVERAGE` environment variable to modify the
-installation behavior. For example:
+the top tier languages and is equivalent to the `json.zip` content. There exists two solutions to get the full coverage: either by setting the environmental variable `CLDR_COVERAGE` to `full` or define the coverage in your `package.json`.
 
+#### Environmental variable
+In this example we are installing `cldr-data` by setting the `CLDR_COVERAGE` to `full`:
 ```
 $ CLDR_COVERAGE=full npm install
+```
+
+#### package.json
+Define your coverage by setting the property `cldr-data-coverage` in your `package.json:
+```
+{
+	...
+	"cldr-data-coverage": "full",
+	...
+}
 ```
 
 ## License
