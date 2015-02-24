@@ -39,7 +39,7 @@ if (process.env.CLDR_URL) {
 
 cldrDownloader(
   url,
-  path.join(__dirname, "json"),
+  __dirname,
   function(error) {
     if (error) {
       if (/E_ALREADY_INSTALLED/.test(error.code)) {
