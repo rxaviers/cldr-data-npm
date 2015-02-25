@@ -15,7 +15,6 @@ function cldrData(path) {
   assert(typeof path === "string", "must include path (e.g., " +
     "\"main/en/numbers\" or \"supplemental/likelySubtags\")");
 
-  path = _path.join("json", path);
   return require("./" + path);
 }
 

@@ -28,10 +28,8 @@ compatible with.
 On your library, access CLDR JSON data using `require("cldr-data")`.
 
 ```javascript
-cldr = require("cldr-data");
-
 function Pluralize(locale) {
-  var plurals = cldr("supplemental/plurals");
+  var plurals = require("cldr-data/supplemental/plurals");
   var language = extractLanguageFrom(locale);
 
   // Your awesome pluralization logic
