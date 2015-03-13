@@ -18,8 +18,10 @@ Bonus goals
 
 ## Usage
 
-On the `package.json` of your i18n library, define its CLDR data dependency.
-compatible with.
+### For libraries
+
+On the `package.json` of your i18n library, define its CLDR data dependency by
+using the *peerDependencies* property.
 
     "peerDependencies": {
       "cldr-data": ">=26"
@@ -49,19 +51,35 @@ find more details switching to the [Foo Number Format Library Example][] or
 [Application Example]: https://github.com/rxaviers/cldr-data-npm/tree/example-application
 [cldr.js]: https://github.com/rxaviers/cldrjs
 
-### Locale coverage
+### For applications
 
-By default, the locale coverage installed is `core`, which Unicode defines as
-the top tier languages and is equivalent to the `json.zip` content. There exists two solutions to get the full coverage: either by setting the environmental variable `CLDR_COVERAGE` to `full` or define the coverage in your `package.json`.
+On the `package.json` of your applications, define its CLDR data dependency by
+using the *dependencies* or *devDependencies*property.
 
-#### Environmental variable
-In this example we are installing `cldr-data` by setting the `CLDR_COVERAGE` to `full`:
+    "dependencies": {
+      "cldr-data": "26",
+      "libraries-that-use-cldr-data": "x"
+    }
+
+#### Locale coverage
+
+By default, the locale coverage installed is **core**, which Unicode defines as
+the top tier languages and is equivalent to the `json.zip` content. There are
+two ways to modify the installation and get the **full** coverage instead.
+
+*Use the environment variable `CLDR_COVERAGE`*
+
+On the command line, set the locale coverage using the environment variable.
+
 ```
 $ CLDR_COVERAGE=full npm install
 ```
 
-#### package.json
-Define your coverage by setting the property `cldr-data-coverage` in your `package.json:
+*Use the package.json `cldr-data-coverage` property*
+
+On the `package.json` of you application, set the locale coverage using the
+`cldr-data-coverage` property.
+
 ```
 {
   ...
