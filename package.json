@@ -30,7 +30,7 @@
     "test": "grunt"
   },
   "dependencies": {
-    "cldr-data-downloader": "0.1.x"
+    "cldr-data-downloader": "0.2.x"
   },
   "devDependencies": {
     "grunt": "0.4.x",
