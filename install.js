@@ -8,38 +8,44 @@
 
 "use strict";
 
+var coverage, parentPackage, srcUrl;
+
 var cldrDownloader = require("cldr-data-downloader");
 var path = require("path");
-var urls = require("./urls");
-var parentPackage;
-var url;
 
-try {
-  parentPackage = require("../../package.json");
-}
-catch(error) {}
-
-url = urls[process.env.CLDR_COVERAGE || "core"];
-
-if (parentPackage) {
-  if (parentPackage["cldr-data-coverage"] && parentPackage.dependencies["cldr-data"]) {
-    if (!/^full|core$/.test(parentPackage["cldr-data-coverage"])) {
-      throw new TypeError("Your `cldr-data-coverage` setting must have the value \"core\" or \"full\".");
-    }
-    url = urls[parentPackage["cldr-data-coverage"]];
-  }
-}
+var options = {};
 
 if (process.env.CLDR_URL) {
-  url = url.replace(
+  srcUrl = srcUrl.replace(
     "http://www.unicode.org/Public/cldr",
     process.env.CLDR_URL.replace(/\/$/, "")
   );
+
+} else {
+
+  srcUrl = path.join(__dirname, "./urls.json");
+
+  try {
+    parentPackage = require("../../package.json");
+    if (parentPackage["cldr-data-coverage"] && parentPackage.dependencies["cldr-data"]) {
+      coverage = parentPackage["cldr-data-coverage"];
+    }
+  }
+  catch(error) {}
+
+  if (process.env.CLDR_COVERAGE) {
+    coverage = process.env.CLDR_COVERAGE;
+  }
+
+  if (coverage) {
+    options.srcUrlKey = coverage;
+  }
 }
 
 cldrDownloader(
-  url,
+  srcUrl,
   __dirname,
+  options,
   function(error) {
     if (error) {
       if (/E_ALREADY_INSTALLED/.test(error.code)) {
