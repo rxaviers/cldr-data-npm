@@ -8,14 +8,70 @@
 
 "use strict";
 
+var MAIN_FILES = ["ca-buddhist", "ca-chinese", "ca-coptic", "ca-dangi",
+  "ca-ethiopic-amete-alem", "ca-ethiopic", "ca-generic", "ca-gregorian",
+  "ca-hebrew", "ca-indian", "ca-islamic-civil", "ca-islamic", "ca-islamic-rgsa",
+  "ca-islamic-tbla", "ca-islamic-umalqura", "ca-japanese", "ca-persian", "ca-roc",
+  "characters", "currencies", "dateFields", "delimiters", "languages", "layout",
+  "listPatterns", "localeDisplayNames", "measurementSystemNames", "numbers",
+  "posix", "scripts", "territories", "timeZoneNames", "units", "variants"
+];
+var SUPPLEMENTAL_FILES = ["aliases", "calendarData", "calendarPreferenceData",
+  "characterFallbacks", "codeMappings", "currencyData", "gender",
+  "languageData", "languageMatching", "likelySubtags", "measurementData",
+  "metaZones", "numberingSystems", "ordinals", "parentLocales", "plurals",
+  "postalCodeData", "primaryZones", "references", "telephoneCodeData",
+  "territoryContainment", "territoryInfo", "timeData", "weekData",
+  "windowsZones"
+];
+
 var assert = require("assert");
 var _path = require("path");
 
-function cldrData(path) {
+function argsToArray(arg) {
+  return [].slice.call(arg, 0);
+}
+
+function flatten(obj) {
+  var arr = [];
+  function _flatten(obj, arr) {
+    if(Array.isArray(obj)) {
+      return obj.forEach(function(obj) {
+        _flatten(obj, arr);
+      });
+    }
+    arr.push(obj);
+  }
+  _flatten(obj, arr);
+  return arr;
+}
+
+function cldrData(path/*, ...*/) {
   assert(typeof path === "string", "must include path (e.g., " +
     "\"main/en/numbers\" or \"supplemental/likelySubtags\")");
 
+  if (arguments.length > 1) {
+    return argsToArray(arguments).reduce(function(sum, path) {
+      sum.push(cldrData(path));
+      return sum;
+    }, []);
+  }
   return require("./" + path);
+}
+
+function mainPathsFor(locales) {
+  return locales.reduce(function(sum, locale) {
+    MAIN_FILES.forEach(function(mainFile) {
+      sum.push(_path.join("main", locale, mainFile));
+    });
+    return sum;
+  }, []);
+}
+
+function supplementalPaths() {
+  return SUPPLEMENTAL_FILES.map(function(supplementalFile) {
+    return _path.join("supplemental", supplementalFile);
+  });
 }
 
 Object.defineProperty(cldrData, "availableLocales", {
@@ -24,23 +80,19 @@ Object.defineProperty(cldrData, "availableLocales", {
   }
 });
 
-cldrData.forEachMain = function(callback) {
-  assert(typeof callback === "function", "must include callback function");
+cldrData.all = function() {
+  var paths = supplementalPaths().concat(mainPathsFor(this.availableLocales));
+  return cldrData.apply({}, paths);
+}
 
-  cldrData.availableLocales.forEach(function(locale) {
-    callback(function(path) {
-      return cldrData(_path.join("main", locale, path));
-    });
-  });
-};
+cldrData.entireMainFor = function(locale/*, ...*/) {
+  assert(typeof locale === "string", "must include locale (e.g., " +
+    "\"en\")");
+  return cldrData.apply({}, mainPathsFor(argsToArray(arguments)));
+}
 
-cldrData.main = function(path) {
-  assert(typeof path === "string", "must include path (e.g., " +
-    "\"numbers\" or \"ca-gregorian\")");
-
-  return cldrData.availableLocales.map(function(locale) {
-    return cldrData(_path.join("main", locale, path));
-  });
+cldrData.entireSupplemental = function() {
+  return cldrData.apply({}, supplementalPaths());
 }
 
 module.exports = cldrData;
