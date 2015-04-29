@@ -8,12 +8,45 @@
 
 "use strict";
 
-var coverage, parentPackage, srcUrl;
+var coverage, parentPackage, peerPackages, srcUrl;
 
 var cldrDownloader = require("cldr-data-downloader");
+var glob = require("glob").sync;
 var path = require("path");
 
 var options = {};
+
+try {
+  parentPackage = require("../../package.json");
+} catch(error) {}
+
+try {
+  peerPackages = glob("../*/package.json").map(function(file) {
+    try {
+      return require(path.resolve(file));
+    } catch(error) {
+      return {};
+    }
+  });
+} catch(error) {
+  console.error(
+    "Warning: Something weird happened checking whether this is a " +
+    "peer dependency.", error.message
+  );
+  peerDependencies = [];
+}
+
+if (!(parentPackage.dependencies && parentPackage.dependencies["cldr-data"]) &&
+      peerDependencies.some(function(peerDependency) {
+        return peerDependency.peerDependencies &&
+          peerDependency.peerDependencies["cldr-data"];
+      }) {
+  console.error(
+    "Warning: Skipping downloading CLDR data, because `cldr-data` is a " +
+    "peer dependency, not a real one."
+  );
+  process.exit(0);
+}
 
 if (process.env.CLDR_URL) {
   srcUrl = srcUrl.replace(
@@ -25,21 +58,9 @@ if (process.env.CLDR_URL) {
 
   srcUrl = path.join(__dirname, "./urls.json");
 
-  try {
-    parentPackage = require("../../package.json");
-    if (parentPackage.peerDependencies && parentPackage.peerDependencies["cldr-data"] &&
-          !(parentPackage.dependencies && parentPackage.dependencies["cldr-data"])) {
-      console.error(
-        "Warning: Skipping downloading CLDR data, because `cldr-data` is a " +
-        "peer dependency, not a real one."
-      );
-      process.exit(0);
-    }
-    if (parentPackage["cldr-data-coverage"] && parentPackage.dependencies["cldr-data"]) {
-      coverage = parentPackage["cldr-data-coverage"];
-    }
+  if (parentPackage["cldr-data-coverage"] && parentPackage.dependencies["cldr-data"]) {
+    coverage = parentPackage["cldr-data-coverage"];
   }
-  catch(error) {}
 
   if (process.env.CLDR_COVERAGE) {
     coverage = process.env.CLDR_COVERAGE;
