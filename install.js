@@ -17,10 +17,14 @@ var path = require("path");
 var options = {};
 
 try {
+  console.log("parentPackage", path.resolve("../../package.json"));
   parentPackage = require("../../package.json");
 } catch(error) {}
 
 try {
+  console.log("peerPackages", glob("../*/package.json").map(function(file) {
+    return path.resolve(file);
+  }));
   peerPackages = glob("../*/package.json").map(function(file) {
     try {
       return require(path.resolve(file));
@@ -33,14 +37,14 @@ try {
     "Warning: Something weird happened checking whether this is a " +
     "peer dependency.", error.message
   );
-  peerDependencies = [];
+  peerPackages = [];
 }
 
 if (!(parentPackage.dependencies && parentPackage.dependencies["cldr-data"]) &&
-      peerDependencies.some(function(peerDependency) {
-        return peerDependency.peerDependencies &&
-          peerDependency.peerDependencies["cldr-data"];
-      }) {
+      peerPackages.some(function(peerPackage) {
+        return peerPackage.peerDependencies &&
+          peerPackage.peerDependencies["cldr-data"];
+      })) {
   console.error(
     "Warning: Skipping downloading CLDR data, because `cldr-data` is a " +
     "peer dependency, not a real one."
