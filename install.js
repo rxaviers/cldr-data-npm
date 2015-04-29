@@ -27,6 +27,14 @@ if (process.env.CLDR_URL) {
 
   try {
     parentPackage = require("../../package.json");
+    if (parentPackage.peerDependencies && parentPackage.peerDependencies["cldr-data"] &&
+          !(parentPackage.dependencies && parentPackage.dependencies["cldr-data"])) {
+      console.error(
+        "Warning: Skipping downloading CLDR data, because `cldr-data` is a " +
+        "peer dependency, not a real one."
+      );
+      process.exit(0);
+    }
     if (parentPackage["cldr-data-coverage"] && parentPackage.dependencies["cldr-data"]) {
       coverage = parentPackage["cldr-data-coverage"];
     }
