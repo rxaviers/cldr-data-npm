@@ -54,7 +54,7 @@ find more details switching to the [Foo Number Format Library Example][] or
 ### For applications
 
 On the `package.json` of your applications, define its CLDR data dependency by
-using the *dependencies* or *devDependencies*property.
+using the *dependencies* or *devDependencies* property.
 
     "dependencies": {
       "cldr-data": "26",
