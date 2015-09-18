@@ -8,14 +8,7 @@
 
 "use strict";
 
-var MAIN_FILES = ["ca-buddhist", "ca-chinese", "ca-coptic", "ca-dangi",
-  "ca-ethiopic-amete-alem", "ca-ethiopic", "ca-generic", "ca-gregorian",
-  "ca-hebrew", "ca-indian", "ca-islamic-civil", "ca-islamic", "ca-islamic-rgsa",
-  "ca-islamic-tbla", "ca-islamic-umalqura", "ca-japanese", "ca-persian", "ca-roc",
-  "characters", "currencies", "dateFields", "delimiters", "languages", "layout",
-  "listPatterns", "localeDisplayNames", "measurementSystemNames", "numbers",
-  "posix", "scripts", "territories", "timeZoneNames", "units", "variants"
-];
+var JSON_EXTENSION = /^(.*)\.json$/;
 
 var assert = require("assert");
 var _fs = require("fs");
@@ -39,6 +32,16 @@ function flatten(obj) {
   return arr;
 }
 
+function jsonFiles(dirName) {
+  var fileList = _fs.readdirSync(dirName);
+
+  return fileList.reduce(function(sum, file) {
+    if (JSON_EXTENSION.test(file)) {
+      return sum.concat(file.match(JSON_EXTENSION)[1]);
+    }
+  }, []);
+}
+
 function cldrData(path/*, ...*/) {
   assert(typeof path === "string", "must include path (e.g., " +
     "\"main/en/numbers\" or \"supplemental/likelySubtags\")");
@@ -54,7 +57,8 @@ function cldrData(path/*, ...*/) {
 
 function mainPathsFor(locales) {
   return locales.reduce(function(sum, locale) {
-    MAIN_FILES.forEach(function(mainFile) {
+    var mainFiles = jsonFiles(_path.join("main", locale));
+    mainFiles.forEach(function(mainFile) {
       sum.push(_path.join("main", locale, mainFile));
     });
     return sum;
@@ -62,12 +66,7 @@ function mainPathsFor(locales) {
 }
 
 function supplementalPaths() {
-  var jsonExtension = /^(.*)\.json$/;
-  var supplementalFiles = _fs.readdirSync("supplemental").filter(function(file) {
-    return jsonExtension.test(file);
-  }).map(function(file) {
-    return file.match(jsonExtension)[1];
-  });
+  var supplementalFiles = jsonFiles("supplemental");
 
   return supplementalFiles.map(function(supplementalFile) {
     return _path.join("supplemental", supplementalFile);
