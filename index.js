@@ -16,16 +16,9 @@ var MAIN_FILES = ["ca-buddhist", "ca-chinese", "ca-coptic", "ca-dangi",
   "listPatterns", "localeDisplayNames", "measurementSystemNames", "numbers",
   "posix", "scripts", "territories", "timeZoneNames", "units", "variants"
 ];
-var SUPPLEMENTAL_FILES = ["aliases", "calendarData", "calendarPreferenceData",
-  "characterFallbacks", "codeMappings", "currencyData", "gender",
-  "languageData", "languageMatching", "likelySubtags", "measurementData",
-  "metaZones", "numberingSystems", "ordinals", "parentLocales", "plurals",
-  "postalCodeData", "primaryZones", "references", "telephoneCodeData",
-  "territoryContainment", "territoryInfo", "timeData", "weekData",
-  "windowsZones"
-];
 
 var assert = require("assert");
+var _fs = require("fs");
 var _path = require("path");
 
 function argsToArray(arg) {
@@ -69,7 +62,14 @@ function mainPathsFor(locales) {
 }
 
 function supplementalPaths() {
-  return SUPPLEMENTAL_FILES.map(function(supplementalFile) {
+  var jsonExtension = /^(.*)\.json$/;
+  var supplementalFiles = _fs.readdirSync("supplemental").filter(function(file) {
+    return jsonExtension.test(file);
+  }).map(function(file) {
+    return file.match(jsonExtension)[1];
+  });
+
+  return supplementalFiles.map(function(supplementalFile) {
     return _path.join("supplemental", supplementalFile);
   });
 }
