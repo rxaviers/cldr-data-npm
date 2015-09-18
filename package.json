@@ -27,7 +27,7 @@
   "main": "index.js",
   "scripts": {
     "install": "node install.js",
-    "test": "grunt"
+    "test": "grunt && node test/index.js"
   },
   "dependencies": {
     "cldr-data-downloader": "0.2.x",
