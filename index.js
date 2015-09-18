@@ -33,7 +33,7 @@ function flatten(obj) {
 }
 
 function jsonFiles(dirName) {
-  var fileList = _fs.readdirSync(dirName);
+  var fileList = _fs.readdirSync(_path.join(__dirname, dirName));
 
   return fileList.reduce(function(sum, file) {
     if (JSON_EXTENSION.test(file)) {
