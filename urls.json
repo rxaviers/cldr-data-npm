@@ -1,6 +1,6 @@
 {
   "core": [
-    "https://github.com/unicode-cldr/cldr-core/archive/28.0.0.zip",
+    "https://github.com/unicode-cldr/cldr-core/archive/28.0.2.zip",
     "https://github.com/unicode-cldr/cldr-dates-modern/archive/28.0.0.zip",
     "https://github.com/unicode-cldr/cldr-cal-buddhist-modern/archive/28.0.0.zip",
     "https://github.com/unicode-cldr/cldr-cal-chinese-modern/archive/28.0.0.zip",
@@ -20,7 +20,7 @@
     "https://github.com/unicode-cldr/cldr-units-modern/archive/28.0.0.zip"
   ],
   "full": [
-    "https://github.com/unicode-cldr/cldr-core/archive/28.0.0.zip",
+    "https://github.com/unicode-cldr/cldr-core/archive/28.0.2.zip",
     "https://github.com/unicode-cldr/cldr-segments-modern/archive/28.0.0.zip",
     "https://github.com/unicode-cldr/cldr-dates-full/archive/28.0.0.zip",
     "https://github.com/unicode-cldr/cldr-cal-buddhist-full/archive/28.0.0.zip",
