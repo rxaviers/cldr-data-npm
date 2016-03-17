@@ -13,8 +13,18 @@ var coverage, parentPackage, peerPackages, srcUrl;
 var cldrDownloader = require("cldr-data-downloader");
 var glob = require("glob").sync;
 var path = require("path");
+var child_process = require('child_process');
 
 var options = {};
+
+var isNpm3
+try {
+  var npmv = child_process.execSync('npm -v').toString('utf8');
+  isNpm3 = (npmv.split('.')[0] == '3');
+}catch(){
+  // better safe than sorry
+  isNpm3 = true;
+}
 
 try {
   parentPackage = require("../../package.json");
@@ -36,7 +46,7 @@ try {
   peerPackages = [];
 }
 
-if (parentPackage &&
+if (!isNpm3 && parentPackage &&
       !(parentPackage.dependencies && parentPackage.dependencies["cldr-data"]) &&
       !(parentPackage.devDependencies && parentPackage.devDependencies["cldr-data"]) &&
       peerPackages.some(function(peerPackage) {
