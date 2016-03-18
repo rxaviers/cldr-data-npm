@@ -17,12 +17,12 @@ var child_process = require('child_process');
 
 var options = {};
 
-var isNpm3
+var isNpm3;
 try {
   var npmv = child_process.execSync('npm -v').toString('utf8');
   isNpm3 = (npmv.split('.')[0] == '3');
-}catch(){
-  // better safe than sorry
+} catch(error) {
+  // Better safe than sorry.
   isNpm3 = true;
 }
 
