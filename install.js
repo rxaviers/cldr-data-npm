@@ -22,8 +22,18 @@ try {
   var npmv = child_process.execSync('npm -v').toString('utf8');
   isNpm3 = (npmv.split('.')[0] == '3');
 } catch(error) {
-  // Better safe than sorry.
-  isNpm3 = true;
+  // child_process.execSync is not available on Node v0.10
+  // fortunately, we can use ENV variables set by npm do detect its version
+  //   npm_config_user_agent: 'npm/2.15.1 node/v0.10.46 darwin x64'
+  //   npm_config_user_agent: 'npm/3.10.3 node/v6.3.0 darwin x64'
+  // Note that users can override the value of this config option,
+  // therefore it's safer to use this method only as a fall-back option.
+  if (/^npm\/2\./.test(process.env.npm_config_user_agent)) {
+    isNpm3 = false;
+  } else {
+    // Better safe than sorry.
+    isNpm3 = true;
+  }
 }
 
 try {
