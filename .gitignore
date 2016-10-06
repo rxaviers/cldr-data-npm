@@ -1,11 +1,12 @@
 node_modules/
-.gitattributes
+
+# CLDR downloaded files.
 .ignored-*
-LICENSE
-/main
-/segments
-/supplemental
-state.json
-scriptMetadata.json
-defaultContent.json
 availableLocales.json
+defaultContent.json
+LICENSE
+main/
+scriptMetadata.json
+segments/
+state.json
+supplemental/
