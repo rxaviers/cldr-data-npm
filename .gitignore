@@ -1,1 +1,11 @@
 node_modules/
+.gitattributes
+.ignored-*
+LICENSE
+/main
+/segments
+/supplemental
+state.json
+scriptMetadata.json
+defaultContent.json
+availableLocales.json
