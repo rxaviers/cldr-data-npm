@@ -73,29 +73,26 @@ if (!isNpm3 && parentPackage &&
 }
 
 if (process.env.CLDR_URL) {
-  srcUrl = srcUrl.replace(
-    "http://www.unicode.org/Public/cldr",
-    process.env.CLDR_URL.replace(/\/$/, "")
-  );
-
+  // Load custom urls.json file from env variable.
+  srcUrl = process.env.CLDR_URL;
+} else if (parentPackage && parentPackage["cldr-url"]) {
+  // Load custom urls.json file from package.json.
+  srcUrl = parentPackage["cldr-url"];
 } else {
-
+  // Default to urls.json.
   srcUrl = path.join(__dirname, "./urls.json");
+}
 
-  if (parentPackage && parentPackage["cldr-data-coverage"] && (
-        (parentPackage.dependencies && parentPackage.dependencies["cldr-data"]) ||
-        (parentPackage.devDependencies && parentPackage.devDependencies["cldr-data"])
-        )) {
-    coverage = parentPackage["cldr-data-coverage"];
-  }
-
-  if (process.env.CLDR_COVERAGE) {
-    coverage = process.env.CLDR_COVERAGE;
-  }
-
-  if (coverage) {
-    options.srcUrlKey = coverage;
-  }
+if (process.env.CLDR_COVERAGE) {
+  coverage = process.env.CLDR_COVERAGE;
+} else if (parentPackage && parentPackage["cldr-data-coverage"] && (
+      (parentPackage.dependencies && parentPackage.dependencies["cldr-data"]) ||
+      (parentPackage.devDependencies && parentPackage.devDependencies["cldr-data"])
+      )) {
+  coverage = parentPackage["cldr-data-coverage"];
+}
+if (coverage) {
+  options.srcUrlKey = coverage;
 }
 
 cldrDownloader(
