@@ -21,7 +21,7 @@ var isNpm3;
 try {
   var npmv = child_process.execSync('npm -v').toString('utf8');
   isNpm3 = (npmv.split('.')[0] == '3');
-} catch (error) {
+} catch(error) {
   // child_process.execSync is not available on Node v0.10
   // fortunately, we can use ENV variables set by npm do detect its version
   //   npm_config_user_agent: 'npm/2.15.1 node/v0.10.46 darwin x64'
@@ -38,17 +38,17 @@ try {
 
 try {
   parentPackage = require("../../package.json");
-} catch (error) {}
+} catch(error) {}
 
 try {
-  peerPackages = glob("../*/package.json").map(function (file) {
+  peerPackages = glob("../*/package.json").map(function(file) {
     try {
       return require(path.resolve(file));
-    } catch (error) {
+    } catch(error) {
       return {};
     }
   });
-} catch (error) {
+} catch(error) {
   console.error(
     "Warning: Something weird happened checking whether this is a " +
     "peer dependency.", error.message
@@ -57,11 +57,11 @@ try {
 }
 
 if (!isNpm3 && parentPackage &&
-  !(parentPackage.dependencies && parentPackage.dependencies["cldr-data"]) &&
-  !(parentPackage.devDependencies && parentPackage.devDependencies["cldr-data"]) &&
-  peerPackages.some(function (peerPackage) {
-    return peerPackage.peerDependencies &&
-      peerPackage.peerDependencies["cldr-data"];
+      !(parentPackage.dependencies && parentPackage.dependencies["cldr-data"]) &&
+      !(parentPackage.devDependencies && parentPackage.devDependencies["cldr-data"]) &&
+      peerPackages.some(function (peerPackage) {
+        return peerPackage.peerDependencies &&
+          peerPackage.peerDependencies["cldr-data"];
   })) {
   console.error(
     "Warning: Skipping to download CLDR data, because `cldr-data` is a " +
@@ -87,9 +87,9 @@ if (process.env.CLDR_URL) {
   }
 
   if (parentPackage && parentPackage["cldr-data-coverage"] && (
-      (parentPackage.dependencies && parentPackage.dependencies["cldr-data"]) ||
-      (parentPackage.devDependencies && parentPackage.devDependencies["cldr-data"])
-    )) {
+        (parentPackage.dependencies && parentPackage.dependencies["cldr-data"]) ||
+        (parentPackage.devDependencies && parentPackage.devDependencies["cldr-data"])
+        )) {
     coverage = parentPackage["cldr-data-coverage"];
   }
 
@@ -106,7 +106,7 @@ cldrDownloader(
   srcUrl,
   __dirname,
   options,
-  function (error) {
+  function(error) {
     if (error) {
       if (/E_ALREADY_INSTALLED/.test(error.code)) {
         error.message = error.message.replace(/Use `options.*/, "Use -f to " +
