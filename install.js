@@ -80,7 +80,11 @@ if (process.env.CLDR_URL) {
 
 } else {
 
-  srcUrl = path.join(__dirname, "./urls.json");
+  if (parentPackage["cldr-data-urls-json"]) {
+    srcUrl = parentPackage["cldr-data-urls-json"];
+  } else {
+    srcUrl = path.join(__dirname, "./urls.json");
+  }
 
   if (parentPackage && parentPackage["cldr-data-coverage"] && (
         (parentPackage.dependencies && parentPackage.dependencies["cldr-data"]) ||
