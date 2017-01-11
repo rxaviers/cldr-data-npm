@@ -38,5 +38,14 @@
     "https://github.com/unicode-cldr/cldr-misc-full/archive/30.0.3.zip",
     "https://github.com/unicode-cldr/cldr-numbers-full/archive/30.0.3.zip",
     "https://github.com/unicode-cldr/cldr-units-full/archive/30.0.3.zip"
+  ],
+  "minimal": [
+    "https://github.com/unicode-cldr/cldr-core/archive/30.0.3.zip",
+    "https://github.com/unicode-cldr/cldr-dates-modern/archive/30.0.3.zip",
+    "https://github.com/unicode-cldr/cldr-localenames-modern/archive/30.0.3.zip",
+    "https://github.com/unicode-cldr/cldr-misc-modern/archive/30.0.3.zip",
+    "https://github.com/unicode-cldr/cldr-numbers-modern/archive/30.0.3.zip",
+    "https://github.com/unicode-cldr/cldr-segments-modern/archive/30.0.3.zip",
+    "https://github.com/unicode-cldr/cldr-units-modern/archive/30.0.3.zip"
   ]
 }
