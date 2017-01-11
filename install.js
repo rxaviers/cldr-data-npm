@@ -59,10 +59,10 @@ try {
 if (!isNpm3 && parentPackage &&
       !(parentPackage.dependencies && parentPackage.dependencies["cldr-data"]) &&
       !(parentPackage.devDependencies && parentPackage.devDependencies["cldr-data"]) &&
-      peerPackages.some(function (peerPackage) {
+      peerPackages.some(function(peerPackage) {
         return peerPackage.peerDependencies &&
           peerPackage.peerDependencies["cldr-data"];
-  })) {
+      })) {
   console.error(
     "Warning: Skipping to download CLDR data, because `cldr-data` is a " +
     "peer dependency. If you want it to be downloaded, make sure it's " +
