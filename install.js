@@ -79,8 +79,8 @@ if (process.env.CLDR_URL) {
   );
 
 } else {
-  if (parentPackage["cldr-data-urlsjson"]) {
-    srcUrl = parentPackage["cldr-data-urlsjson"];
+  if (parentPackage["cldr-data-urls-json"]) {
+    srcUrl = parentPackage["cldr-data-urls-json"];
   } else {
     srcUrl = path.join(__dirname, "./urls.json");
   }
