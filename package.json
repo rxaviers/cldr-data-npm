@@ -30,7 +30,7 @@
     "test": "grunt && node test/index.js"
   },
   "dependencies": {
-    "cldr-data-downloader": "0.2.x",
+    "cldr-data-downloader": "0.3.x",
     "glob": "5.x.x"
   },
   "devDependencies": {
