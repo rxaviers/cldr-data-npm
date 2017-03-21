@@ -97,6 +97,10 @@ if (process.env.CLDR_URL) {
     coverage = parentPackage["cldr-data-coverage"];
   }
 
+  if (parentPackage && parentPackage["cldr-data-urls-filter"]) {
+    options.filterRe = parentPackage["cldr-data-urls-filter"];
+  }
+
   if (coverage) {
     options.srcUrlKey = coverage;
   }

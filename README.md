@@ -88,10 +88,10 @@ On the `package.json` of you application, set the locale coverage using the
 }
 ```
 
-#### Set Custom json file with urls
+#### Set Custom json file with urls or filter existing
 
-By default, used file `urls.json` form cldr-data module, which contain 
-for each lovale coverage 18 urls. For set custom `.json` file, that have 
+By default, used file `urls.json` form cldr-data module, which contain
+for each lovale coverage 18 urls. For set custom `.json` file, that have
 structure accoding `urls.json` use `cldr-data-urls-json` property in `package.json` your webApp
 *Define the package.json `cldr-data-urls-json` property*
 
@@ -105,7 +105,7 @@ structure accoding `urls.json` use `cldr-data-urls-json` property in `package.js
 Path must be relative from cldr-data directory
 
 
-*Example custom cldrdatadwnl.json* 
+*Example custom cldrdatadwnl.json*
 File have only 7 urls.
 ```
 {
@@ -120,6 +120,18 @@ File have only 7 urls.
     ]
 }
 ```
+
+Or you can filter existing urls by regexp pattern, via `cldr-data-urls-filter`
+field in `package.json`:
+
+```
+{
+  ...
+  "cldr-data-urls-filter": "(cldr-core|cldr-numbers-modern|cldr-dates-modern)",
+  ...
+}
+```
+
 
 ## License
 
