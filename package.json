@@ -25,6 +25,12 @@
     "url": "http://rafael.xavier.blog.br"
   },
   "main": "index.js",
+  "files": [
+    "DCO.md",
+    "index.js",
+    "install.js",
+    "urls.json"
+  ],
   "scripts": {
     "install": "node install.js",
     "test": "grunt && node test/index.js"
