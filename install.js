@@ -73,6 +73,7 @@ if (!isNpm3 && parentPackage &&
 }
 
 if (process.env.CLDR_URL) {
+  console.warn("CLDR_URL is deprecated, use CLDR_DATA_URLS_JSON instead.")
   srcUrl = srcUrl.replace(
     "http://www.unicode.org/Public/cldr",
     process.env.CLDR_URL.replace(/\/$/, "")
