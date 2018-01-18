@@ -80,7 +80,6 @@ if (process.env.CLDR_URL) {
   );
 
 } else {
-
   if (process.env.CLDR_DATA_URLS_JSON) {
     srcUrl = process.env.CLDR_DATA_URLS_JSON;
   } else if (parentPackage && parentPackage["cldr-data-urls-json"]) {
@@ -88,23 +87,23 @@ if (process.env.CLDR_URL) {
   } else {
     srcUrl = path.join(__dirname, "./urls.json");
   }
+}
 
-  if (process.env.CLDR_COVERAGE) {
-    coverage = process.env.CLDR_COVERAGE;
-  } else if (parentPackage && parentPackage["cldr-data-coverage"] && (
-        (parentPackage.dependencies && parentPackage.dependencies["cldr-data"]) ||
-        (parentPackage.devDependencies && parentPackage.devDependencies["cldr-data"])
-        )) {
-    coverage = parentPackage["cldr-data-coverage"];
-  }
+if (process.env.CLDR_COVERAGE) {
+  coverage = process.env.CLDR_COVERAGE;
+} else if (parentPackage && parentPackage["cldr-data-coverage"] && (
+      (parentPackage.dependencies && parentPackage.dependencies["cldr-data"]) ||
+      (parentPackage.devDependencies && parentPackage.devDependencies["cldr-data"])
+      )) {
+  coverage = parentPackage["cldr-data-coverage"];
+}
 
-  if (parentPackage && parentPackage["cldr-data-urls-filter"]) {
-    options.filterRe = parentPackage["cldr-data-urls-filter"];
-  }
+if (parentPackage && parentPackage["cldr-data-urls-filter"]) {
+  options.filterRe = parentPackage["cldr-data-urls-filter"];
+}
 
-  if (coverage) {
-    options.srcUrlKey = coverage;
-  }
+if (coverage) {
+  options.srcUrlKey = coverage;
 }
 
 cldrDownloader(
