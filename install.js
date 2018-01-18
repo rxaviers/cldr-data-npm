@@ -98,7 +98,9 @@ if (process.env.CLDR_COVERAGE) {
   coverage = parentPackage["cldr-data-coverage"];
 }
 
-if (parentPackage && parentPackage["cldr-data-urls-filter"]) {
+if (process.env.CLDR_DATA_URLS_FILTER) {
+  options.filterRe = process.env.CLDR_DATA_URLS_FILTER;
+} else if (parentPackage && parentPackage["cldr-data-urls-filter"]) {
   options.filterRe = parentPackage["cldr-data-urls-filter"];
 }
 
