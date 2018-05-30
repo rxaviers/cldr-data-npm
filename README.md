@@ -91,7 +91,7 @@ On the `package.json` of you application, set the locale coverage using the
 #### Set Custom json file with urls or filter existing
 
 By default, used file `urls.json` form cldr-data module, which contain
-for each lovale coverage 18 urls. For set custom `.json` file, that have
+for each locale coverage 18 urls. For set custom `.json` file, that have
 structure accoding `urls.json` use `cldr-data-urls-json` property in `package.json` your webApp
 *Define the package.json `cldr-data-urls-json` property*
 
