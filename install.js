@@ -17,10 +17,10 @@ var child_process = require('child_process');
 
 var options = {};
 
-var isNpm3;
+var isAtLeastNpm3;
 try {
   var npmv = child_process.execSync('npm -v').toString('utf8');
-  isNpm3 = (npmv.split('.')[0] == '3');
+  isAtLeastNpm3 = parseInt(npmv.split('.')[0], 10) >= 3;
 } catch(error) {
   // child_process.execSync is not available on Node v0.10
   // fortunately, we can use ENV variables set by npm do detect its version
@@ -29,10 +29,10 @@ try {
   // Note that users can override the value of this config option,
   // therefore it's safer to use this method only as a fall-back option.
   if (/^npm\/2\./.test(process.env.npm_config_user_agent)) {
-    isNpm3 = false;
+    isAtLeastNpm3 = false;
   } else {
     // Better safe than sorry.
-    isNpm3 = true;
+    isAtLeastNpm3 = true;
   }
 }
 
@@ -56,7 +56,7 @@ try {
   peerPackages = [];
 }
 
-if (!isNpm3 && parentPackage &&
+if (!isAtLeastNpm3 && parentPackage &&
       !(parentPackage.dependencies && parentPackage.dependencies["cldr-data"]) &&
       !(parentPackage.devDependencies && parentPackage.devDependencies["cldr-data"]) &&
       peerPackages.some(function(peerPackage) {
