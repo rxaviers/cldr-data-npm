@@ -13,7 +13,7 @@
     "type": "git",
     "url": "git://github.com/rxaviers/cldr-data-npm.git"
   },
-  "licenses": [
+  "license": [
     {
       "type": "MIT",
       "url": "https://github.com/rxaviers/cldr-data-npm/blob/master/LICENSE"
