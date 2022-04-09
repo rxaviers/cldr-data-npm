@@ -1,6 +1,6 @@
 {
   "name": "cldr-data",
-  "version": "36.0.0",
+  "version": "36.0.1",
   "keywords": [
     "unicode",
     "CLDR",
@@ -36,7 +36,7 @@
     "test": "grunt && node test/index.js"
   },
   "dependencies": {
-    "cldr-data-downloader": "0.3.x",
+    "cldr-data-downloader": "1.0.x",
     "glob": "5.x.x"
   },
   "devDependencies": {
