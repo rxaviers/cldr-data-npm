@@ -40,8 +40,8 @@
     "glob": "5.x.x"
   },
   "devDependencies": {
-    "grunt": "0.4.x",
-    "grunt-contrib-jshint": "0.10.x",
+    "grunt": "1.5.x",
+    "grunt-contrib-jshint": "3.2.x",
     "grunt-dco": "0.0.3",
     "matchdep": "*"
   }
