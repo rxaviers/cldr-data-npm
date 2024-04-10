@@ -11,16 +11,16 @@
 var coverage, parentPackage, peerPackages, srcUrl;
 
 var cldrDownloader = require("cldr-data-downloader");
-var glob = require("glob").sync;
+var glob = require("glob").globSync;
 var path = require("path");
-var child_process = require('child_process');
+var child_process = require("child_process");
 
 var options = {};
 
 var isNpm3;
 try {
-  var npmv = child_process.execSync('npm -v').toString('utf8');
-  isNpm3 = (npmv.split('.')[0] == '3');
+  var npmv = child_process.execSync("npm -v").toString("utf8");
+  isNpm3 = (npmv.split(".")[0] === "3");
 } catch(error) {
   // child_process.execSync is not available on Node v0.10
   // fortunately, we can use ENV variables set by npm do detect its version
@@ -73,7 +73,7 @@ if (!isNpm3 && parentPackage &&
 }
 
 if (process.env.CLDR_URL) {
-  console.warn("CLDR_URL is deprecated, use CLDR_DATA_URLS_JSON instead.")
+  console.warn("CLDR_URL is deprecated, use CLDR_DATA_URLS_JSON instead.");
   srcUrl = srcUrl.replace(
     "http://www.unicode.org/Public/cldr",
     process.env.CLDR_URL.replace(/\/$/, "")
