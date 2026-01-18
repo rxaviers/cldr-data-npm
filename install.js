@@ -17,6 +17,11 @@ var child_process = require("child_process");
 
 var options = {};
 
+var args = process.argv.slice(2);
+if (args.indexOf("-f") !== -1) {
+  options.force = true;
+}
+
 var isNpm3;
 try {
   var npmv = child_process.execSync("npm -v").toString("utf8");
@@ -114,6 +119,7 @@ cldrDownloader(
   options,
   function(error) {
     if (error) {
+      console.error(error);
       if (/E_ALREADY_INSTALLED/.test(error.code)) {
         error.message = error.message.replace(/Use `options.*/, "Use -f to " +
           "override.");
