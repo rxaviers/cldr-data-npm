@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "cldr-data-downloader": "1.1.0",
-    "glob": "10.3.12"
+    "glob": "10.5.0"
   },
   "devDependencies": {
     "grunt": "1.5.x",
