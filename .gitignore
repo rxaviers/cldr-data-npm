@@ -1,4 +1,5 @@
-node_modules/
+/bower_components/
+/node_modules/
 
 # CLDR downloaded files.
 .ignored-*
